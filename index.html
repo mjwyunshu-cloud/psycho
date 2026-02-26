@@ -204,7 +204,7 @@
             <div class="flex flex-col mb-10 pt-10">
                 <div class="h-1 w-16 bg-red-600 mb-6"></div>
                 <h1 class="text-4xl font-black tracking-tighter leading-tight uppercase">认知图谱<br>深度鉴定报告</h1>
-                <p class="text-[10px] font-bold text-red-600 mt-2 tracking-[0.3em]">VERSION 4.5 / STABLE_FIX</p>
+                <p class="text-[10px] font-bold text-red-600 mt-2 tracking-[0.3em]">VERSION 4.6 / FOR_FUN_MODE</p>
             </div>
 
             <div class="flex-1">
@@ -220,8 +220,8 @@
                 </div>
 
                 <div class="bg-gray-50 p-5 text-[11px] text-gray-400 leading-normal border border-gray-100 font-medium">
-                    <span class="font-bold text-red-600 uppercase">【实验说明】</span><br>
-                    扫描前额叶（决策）与杏仁核（情感）的博弈偏好。结果将合成包含个人水印的 3:4 专业视觉报告海报。
+                    <span class="font-bold text-red-600 uppercase">【注意】</span><br>
+                    本程序旨在通过逻辑博弈扫描认知的“图一乐”数据。请勿将其作为医学诊断、人生指南或择偶标准。如果你测出了超高偏移度，恭喜你，在这个平庸的世界里你显得格外有趣。
                 </div>
             </div>
 
@@ -248,7 +248,7 @@
             </div>
             <h2 id="q-text" class="text-[15px] font-bold leading-relaxed mb-8 text-gray-800"></h2>
             <div id="options" class="flex-1 overflow-y-auto custom-scroll pr-2"></div>
-            <div class="mt-4 pt-4 border-t border-gray-100 text-[10px] text-gray-300 font-bold italic">基于直觉答题即可。</div>
+            <div class="mt-4 pt-4 border-t border-gray-100 text-[10px] text-gray-300 font-bold italic uppercase tracking-tighter">Based on intuition / 基于直觉答题</div>
         </div>
 
         <!-- Result Screen -->
@@ -338,7 +338,7 @@
                         </div>
                         <div class="flex justify-between items-end border-t border-gray-100 pt-2 text-[6px] font-mono text-gray-400 uppercase tracking-tighter">
                             <div>© 2026 CLOUDTREE LAB</div>
-                            <div>V.4.5_STABLE_SYNTHESIS</div>
+                            <div>V.4.6_STABLE_FOR_FUN</div>
                         </div>
                     </div>
                 </div>
@@ -364,7 +364,7 @@
             { q: "克隆一个脑结构完全相同的人，你会觉得：", options: [{ t: "他就是我：只要算法一致，生命可复制。", s: 10, neuro: {cellular: 5} }, { t: "他不是我：意识是独特的动态涌现。", s: 0, neuro: {philosophical: 5} }, { t: "我拥有了一个完美的工具。", s: 8, neuro: {computational: 4} }, { t: "他证明了所谓的灵魂是个偶然。", s: 6, neuro: {systems: 5} }] },
             { q: "森林木屋里发现没有眼睛的全家福，你会：", options: [{ t: "把照片翻过去，寻找拍摄者的机位。", s: 10, neuro: {systems: 5} }, { t: "感到害怕跑出去。", s: 0, neuro: {clinical: 5} }, { t: "觉得是极其先锋的视觉表达。", s: 5, neuro: {cognitive: 5} }, { t: "把自己的眼睛画上去。", s: 8, neuro: {philosophical: 5} }] },
             { q: "参加永生比赛：第一名永生，第二名毙命。你是第二名，你会：", options: [{ t: "不择手段让第一名摔倒：生存是最高逻辑。", s: 10, neuro: {computational: 5} }, { t: "坦然接受：我尊重博弈规则。", s: 0, neuro: {philosophical: 5} }, { t: "试图拉第一名同归于尽。", s: 8, neuro: {systems: 5} }, { t: "试图收买裁判。", s: 4, neuro: {behavioral: 5} }] },
-            { q: "关于“爱”，你倾向于认为它是：", options: [{ t: "一种高效的、带有迷惑性的占有策略。", s: 10, neuro: {computational: 5} }, { t: "一种温暖的、超自然的情感连接。", s: 0, neuro: {clinical: 5} }, { t: "基因驱动的、为了繁衍的化学错觉。", s: 8, neuro: {cellular: 5} }, { t: "一种脆弱但必要的社会化契约。", s: 5, neuro: {philosophical: 5} }] },
+            { q: "关于“爱”，你倾向于认为它是：", options: [{ t: "一种高效的、带有迷惑性的占有策略。", s: 10, neuro: {computational: 5} }, { t: "一种温暖的、超自然的情感连接。", s: 0, neuro: {clinical: 5} }, { t: "基因驱动的、为了繁演的化学错觉。", s: 8, neuro: {cellular: 5} }, { t: "一种脆弱但必要的社会化契约。", s: 5, neuro: {philosophical: 5} }] },
             { q: "你站在高楼阳台，抓住了快坠落的陌生人，然后你突然松手。为什么？", options: [{ t: "为了观察希望破灭那一刻的真实表情。", s: 10, neuro: {philosophical: 5} }, { t: "我力气不够，这是计算后的放弃。", s: 4, neuro: {computational: 3} }, { t: "我突然发现他是我的仇人。", s: 6, neuro: {behavioral: 5} }, { t: "被吓到了。", s: 0, neuro: {clinical: 5} }] },
             { q: "邻居是杀手但对你很好，你会：", options: [{ t: "只要不威胁我，他依然是个好邻居。", s: 10, neuro: {computational: 5} }, { t: "立即报警。", s: 0, neuro: {clinical: 5} }, { t: "暗中观察收集素材。", s: 8, neuro: {cognitive: 5} }, { t: "搬家。", s: 0, neuro: {behavioral: 5} }] },
             { q: "受伤小猫在路边呻吟，没人在场，你会：", options: [{ t: "结束它的痛苦：这比漫长的死亡更仁慈。", s: 10, neuro: {philosophical: 5} }, { t: "送去医院。", s: 0, neuro: {clinical: 5} }, { t: "视而不见。", s: 7, neuro: {behavioral: 5} }, { t: "拍张照片。", s: 2, neuro: {cognitive: 5} }] },
