@@ -304,18 +304,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- 社交模块 -->
-                <div class="border-2 border-black p-4 flex items-center gap-4 bg-white mb-4">
-                    <div class="w-24 h-24 bg-gray-50 flex-shrink-0 flex items-center justify-center border border-dashed border-gray-300">
-                        <div class="text-[8px] text-gray-300 text-center font-bold tracking-tighter uppercase">QR Placeholder<br>Cloudtree</div>
-                    </div>
-                    <div class="flex-1">
-                        <div class="text-[10px] font-black uppercase mb-1 opacity-20">Follow on XHS</div>
-                        <div class="text-lg font-black leading-none mb-1">云树cloudtree</div>
-                        <p class="text-[8px] text-gray-500 leading-tight uppercase">探索极端视觉表达与人类认知的深层边界。</p>
-                    </div>
-                </div>
             </div>
 
             <div class="mt-auto pt-4 flex justify-between items-center border-t border-gray-100">
@@ -399,26 +387,15 @@
             }
         }
 
-        /**
-         * 改进的重置函数
-         * 不再使用物理刷新，改为逻辑重置状态，秒开且更稳定
-         */
         function resetApp() {
-            // 隐藏所有屏幕
             const screens = document.querySelectorAll('.screen');
             screens.forEach(s => s.classList.remove('active'));
-
-            // 重置核心变量
             currentQ = 0;
             score = 0;
             history = [];
             meta = "";
-
-            // UI 细节清理
             document.getElementById('p-bar').style.width = "0%";
             document.getElementById('res-title').classList.remove('glitch', 'text-red-600');
-            
-            // 返回初始屏幕
             document.getElementById('start-screen').classList.add('active');
         }
 
