@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>潜意识脑洞鉴定 | 云树cloudtree</title>
+    <title>脑洞大开测试！ | 云树cloudtree</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700;900&family=JetBrains+Mono:wght@400;700&display=swap');
 
@@ -115,10 +114,11 @@
             transition: width 0.3s;
         }
 
-        /* 3:4 比例结果页 */
+        /* 3:4 海报预览 */
         .poster-area {
-            aspect-ratio: 3 / 4;
             width: 100%;
+            max-width: 440px;
+            aspect-ratio: 3 / 4;
             background: white;
             padding: 25px;
             position: relative;
@@ -126,6 +126,9 @@
             display: flex;
             flex-direction: column;
             border: 1px solid #eee;
+            margin: 0 auto;
+            box-sizing: border-box;
+            flex-shrink: 0;
         }
 
         .stamp {
@@ -142,9 +145,25 @@
             z-index: 20;
         }
 
-        .chart-container {
-            width: 170px;
+        .brain-hole-visual {
+            width: 100%;
+            height: 160px;
             margin: 0 auto;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #hole-svg { overflow: visible; }
+
+        .data-label {
+            position: absolute;
+            font-size: 7px;
+            font-weight: 900;
+            color: #ccc;
+            text-transform: uppercase;
+            white-space: nowrap;
         }
 
         .science-log {
@@ -166,17 +185,17 @@
             background: var(--primary-black);
             color: white;
             font-weight: 900;
-            padding: 12px;
+            padding: 14px;
             text-transform: uppercase;
-            font-size: 12px;
-            letter-spacing: 2px;
-            transition: all 0.3s;
+            font-size: 14px;
+            letter-spacing: 4px;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .btn-action:hover { background: var(--primary-red); }
+        .btn-action:hover { background: var(--primary-red); transform: scale(1.02); }
 
         .qr-wrapper {
-            width: 60px;
-            height: 60px;
+            width: 55px;
+            height: 55px;
             border: 1px solid #eee;
             padding: 2px;
             flex-shrink: 0;
@@ -193,7 +212,7 @@
             100% { transform: translate(1px, -1px); }
         }
 
-        /* 延伸思考样式 */
+        /* 延伸思考卡片样式 */
         .extension-section {
             margin-top: 30px;
             padding-top: 30px;
@@ -224,75 +243,68 @@
     <div class="canvas">
         <!-- Start Screen -->
         <div id="start-screen" class="screen active">
-            <div class="flex flex-col mb-10 pt-10">
+            <div class="flex flex-col pt-8">
                 <div class="h-1 w-16 bg-red-600 mb-6"></div>
-                <h1 class="text-4xl font-black tracking-tighter leading-tight uppercase">认知图谱<br>深度鉴定报告</h1>
-                <p class="text-[10px] font-bold text-red-600 mt-2 tracking-[0.3em]">VERSION 4.7 / NEURO_EXTENDED</p>
+                <h1 class="text-5xl font-black tracking-tighter leading-none mb-2 whitespace-nowrap">脑洞大开测试！</h1>
+                <p class="text-[10px] font-bold text-red-600 mt-2 tracking-[0.3em]">VERSION 7.0 / SOUL_REBORN</p>
             </div>
 
-            <div class="flex-1">
-                <p class="text-sm leading-relaxed text-gray-600 mb-8 border-l-4 border-yellow-400 pl-4 italic">
+            <div class="flex-1 flex flex-col justify-center">
+                <p class="text-sm leading-relaxed text-gray-500 mb-10 border-l-4 border-yellow-400 pl-4 italic">
                     “极致的理性不是冷酷，而是对世界运行规则的无损识别。本实验将通过 20 组极端博弈，构建你的思维图谱。”
                 </p>
+
+                <!-- 居中的按钮 -->
+                <button onclick="startApp()" class="w-full btn-action shadow-2xl mb-12">开启扫描程序</button>
                 
-                <div class="grid grid-cols-4 gap-2 mb-10">
-                    <div class="h-16 bg-red-600"></div>
-                    <div class="h-16 bg-yellow-400"></div>
-                    <div class="h-16 bg-blue-600"></div>
-                    <div class="h-16 bg-black"></div>
+                <div class="grid grid-cols-4 gap-2 mb-8">
+                    <div class="h-14 bg-red-600"></div>
+                    <div class="h-14 bg-yellow-400"></div>
+                    <div class="h-14 bg-blue-600"></div>
+                    <div class="h-14 bg-black"></div>
                 </div>
 
                 <div class="bg-gray-50 p-5 text-[11px] text-gray-400 leading-normal border border-gray-100 font-medium">
-                    <span class="font-bold text-red-600 uppercase">【注意】</span><br>
-                    本程序旨在通过逻辑博弈扫描认知的“图一乐”数据。请勿将其作为医学诊断、人生指南或择偶标准。如果你测出了超高偏移度，恭喜你，在这个平庸的世界里你显得格外有趣。
+                    <span class="font-bold text-red-600 uppercase tracking-widest">【EXPERIMENTAL NOTICE】</span><br>
+                    本程序通过 20 组极端逻辑陷阱扫描受试者的决策权重。仅供娱乐分享。结果中包含隐晦的脑科学成因分析及 3:4 比例脑洞镜像海报。
                 </div>
             </div>
-
+            
             <div class="mt-4 text-[9px] text-gray-300 font-mono tracking-widest uppercase flex items-center gap-2">
-                <span>© 云树cloudtree LAB</span>
+                <span>By 云树cloudtree LAB</span>
                 <div class="flex-1 h-px bg-gray-100"></div>
             </div>
-
-            <button onclick="startApp()" class="btn-action mt-6">开启扫描程序</button>
         </div>
 
         <!-- Quiz Screen -->
         <div id="quiz-screen" class="screen">
             <div class="progress-line"><div id="p-bar" class="progress-fill"></div></div>
-            <div id="back-nav" class="mb-4" style="visibility: hidden;">
-                <div onclick="goBack()" class="text-[10px] font-black text-gray-400 flex items-center gap-1 cursor-pointer hover:text-black">
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-                    PREVIOUS
-                </div>
-            </div>
+            <div id="back-nav" class="mb-4" style="visibility: hidden;"><div onclick="goBack()" class="text-[10px] font-black text-gray-400 flex items-center gap-1 cursor-pointer hover:text-black uppercase">PREVIOUS</div></div>
             <div class="flex justify-between items-end mb-6">
                 <div class="text-6xl font-black opacity-5" id="q-num">01</div>
                 <div class="text-[10px] font-bold uppercase text-red-600 tracking-widest">Logic Probe</div>
             </div>
             <h2 id="q-text" class="text-[15px] font-bold leading-relaxed mb-8 text-gray-800"></h2>
             <div id="options" class="flex-1 overflow-y-auto custom-scroll pr-2"></div>
-            <div class="mt-4 pt-4 border-t border-gray-100 text-[10px] text-gray-300 font-bold italic uppercase tracking-tighter">Based on intuition / 基于直觉答题</div>
         </div>
 
         <!-- Result Screen -->
         <div id="result-screen" class="screen !p-0">
             <div class="flex-1 overflow-y-auto custom-scroll p-4" id="scroll-content">
                 <!-- 3:4 海报合成区 -->
-                <div id="capture-area" class="poster-area mx-auto shadow-2xl">
+                <div id="capture-area" class="poster-area shadow-2xl">
                     <div class="stamp">Verified</div>
-                    
                     <div class="flex items-start gap-3 mb-4">
                         <div class="h-8 w-1.5 bg-red-600"></div>
                         <div>
-                            <h2 class="text-lg font-black uppercase tracking-tighter leading-none" id="res-title">认知图谱报告</h2>
-                            <p class="text-[7px] font-mono text-gray-400 mt-1 uppercase">ARCHITECT: CLOUDTREE LAB</p>
+                            <h2 class="text-lg font-black uppercase tracking-tighter leading-none" id="res-title">鉴定报告</h2>
+                            <p class="text-[7px] font-mono text-gray-400 mt-1 uppercase italic tracking-widest">Neuro-Leakage Scan</p>
                         </div>
                     </div>
 
-                    <!-- 顶部数据概览 -->
                     <div class="flex items-center gap-4 mb-2 bg-gray-50 p-2 rounded">
                         <div class="relative flex-shrink-0">
-                            <svg width="45" height="45" viewBox="0 0 100 100">
+                            <svg width="40" height="40" viewBox="0 0 100 100">
                                 <circle cx="50" cy="50" r="48" fill="#fff" stroke="#eee" stroke-width="1" />
                                 <path id="pie-slice" d="M 50 50 L 50 2 A 48 48 0 0 1 98 50 Z" fill="#e60012" />
                                 <circle cx="50" cy="50" r="4" fill="black" />
@@ -304,87 +316,74 @@
                         </div>
                     </div>
 
-                    <!-- 雷达图展示 -->
-                    <div class="chart-container">
-                        <canvas id="radarChart"></canvas>
+                    <!-- 脑洞视觉 -->
+                    <div class="brain-hole-visual">
+                        <svg id="hole-svg" viewBox="0 0 300 300" width="100%" height="100%">
+                            <path d="M70,240 Q70,150 110,130 Q120,90 160,100 Q200,110 200,170 Q200,240 150,250 L70,250" fill="none" stroke="#f0f0f0" stroke-width="1.5"/>
+                            <circle cx="150" cy="150" r="28" fill="white" stroke="black" stroke-width="2.5" stroke-dasharray="4 2"/>
+                            <g id="rays-container"></g>
+                        </svg>
+                        <div id="labels-overlay" class="absolute inset-0 pointer-events-none"></div>
                     </div>
 
-                    <!-- 核心分析 -->
                     <div class="flex-1">
-                        <p id="res-desc" class="text-[9px] leading-relaxed text-gray-700 italic border-l-4 border-black pl-3 mb-2"></p>
-                        
+                        <p id="res-desc" class="text-[9px] font-medium text-gray-700 italic border-l-4 border-black pl-3 mb-2 leading-relaxed"></p>
                         <div class="p-2 bg-black text-white text-[7px] font-mono leading-relaxed mb-2 rounded" id="meta-eval"></div>
-
-                        <!-- 柱状图数据 -->
+                        
+                        <!-- 完整数据条 -->
                         <div class="grid grid-cols-2 gap-3 bg-gray-100 p-2 mb-2 rounded">
-                            <div class="flex gap-1.5 items-end h-12">
+                            <div class="flex gap-1.5 items-end h-10">
                                 <div class="bar-anim bg-black" id="bar-1" style="height:0%"></div>
                                 <div class="bar-anim bg-red-600" id="bar-2" style="height:0%"></div>
                                 <div class="bar-anim bg-gray-400" id="bar-3" style="height:0%"></div>
                                 <div class="bar-anim bg-white border border-black" id="bar-4" style="height:0%"></div>
                             </div>
                             <div class="flex flex-col justify-center gap-1">
-                                <div class="flex justify-between text-[6px] border-b border-gray-200">
+                                <div class="flex justify-between text-[6px]">
                                     <span class="opacity-40 uppercase font-bold tracking-tighter">LOGIC</span>
                                     <span id="stat-1" class="font-black text-black">0</span>
                                 </div>
-                                <div class="flex justify-between text-[6px] border-b border-gray-200">
-                                    <span class="opacity-40 uppercase font-bold tracking-tighter">EMPATHY</span>
+                                <div class="flex justify-between text-[6px]">
+                                    <span class="opacity-40 uppercase font-bold tracking-tighter">MIMICRY</span>
                                     <span id="stat-2" class="font-black text-black">0</span>
-                                </div>
-                                <div class="flex justify-between text-[6px] border-b border-gray-200">
-                                    <span class="opacity-40 uppercase font-bold tracking-tighter">AMYGDALA</span>
-                                    <span id="stat-3" class="font-black text-black">0</span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="science-log">
-                            <span class="font-black text-black uppercase">Neuro-inference:</span><br>
-                            <span id="neuro-text">分析中...</span>
+                            <span class="font-black text-black uppercase tracking-tighter">Neuro-inference:</span><br>
+                            <span id="neuro-text">正在分析前额叶与杏仁核共振比...</span>
                         </div>
                     </div>
 
-                    <!-- 二维码与页脚 -->
-                    <div class="mt-auto pt-3 border-t border-black">
-                        <div class="flex items-center justify-between gap-4 mb-2">
-                             <div class="flex-1">
-                                <div class="text-[8px] font-black uppercase text-gray-400">Scan for Profile</div>
-                                <div class="text-[10px] font-black uppercase tracking-widest">云树cloudtree</div>
-                                <div class="text-[7px] text-gray-400 mt-1 leading-tight italic">
-                                    要求：在柱状图与饼图中二选一<br>不得同时使用。
-                                </div>
-                             </div>
-                             <div class="qr-wrapper">
-                                 <img src="wechat-qr.png" alt="QR" class="w-full h-full object-cover" onerror="this.src='https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=云树cloudtree'; this.style.opacity='0.2';">
-                             </div>
+                    <div class="mt-auto pt-2 border-t border-black flex justify-between items-end">
+                        <div class="flex-1">
+                            <div class="text-[10px] font-black uppercase tracking-widest">云树cloudtree LAB</div>
+                            <div class="text-[6px] font-mono text-gray-400 mt-1 uppercase">ID: FULL_SYSTEM_SCAN</div>
                         </div>
-                        <div class="flex justify-between items-end border-t border-gray-100 pt-2 text-[6px] font-mono text-gray-400 uppercase tracking-tighter">
-                            <div>© 2026 CLOUDTREE LAB</div>
-                            <div>V.4.7_STABLE_EXTENDED</div>
+                        <div class="qr-wrapper">
+                             <img src="wechat-qr.png" alt="QR" class="w-full h-full object-cover" onerror="this.src='https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=云树cloudtree';">
                         </div>
                     </div>
                 </div>
 
-                <!-- 延伸思考与科普板块 (海报外显示) -->
+                <!-- 延伸思考与科普板块 (海报外显示 - 灵魂回归) -->
                 <div class="extension-section px-2">
                     <div class="flex items-center gap-2 mb-6">
-                        <div class="w-2 h-6 bg-yellow-400"></div>
+                        <div class="w-2 h-6 bg-red-600"></div>
                         <h3 class="text-xl font-black uppercase italic tracking-tighter">意识边际：延伸思考</h3>
                     </div>
 
-                    <!-- 科普知识 -->
-                    <div class="mb-10 bg-white p-5 border border-gray-200">
-                        <div class="text-xs font-black text-red-600 mb-2 uppercase"># 神经科学简报</div>
+                    <div class="mb-10 bg-white p-5 border-2 border-black">
+                        <div class="text-xs font-black text-red-600 mb-2 uppercase tracking-widest"># 神经科学简报</div>
                         <h4 class="text-sm font-bold mb-3">理性与情感的“零和博弈”</h4>
                         <p class="text-xs text-gray-500 leading-relaxed">
-                            脑神经科学研究表明，当我们面对极端逻辑博弈时，大脑的 **前额叶皮层（PFC）** 与 **杏仁核（Amygdala）** 会处于激烈的对抗状态。
+                            在所谓“高功能捕食者”的大脑中，**VMPFC（腹内侧前额叶）**的连接呈现出独特的隔离状态。这意味着他们可以像读一本无聊的说明书一样去“读取”他人的情感，而不会产生任何生理波动。
                             <br><br>
-                            PFC 负责后果预测、损益计算及理性抑制；而杏仁核则是情绪反应的“哨兵”，负责产生同情与恐惧。高“逻辑纯度”的受试者通常表现出 PFC 对杏仁核的强势压制。在极端案例中，这种压制是如此彻底，以至于道德感会被转化为纯粹的数学权重。
+                            这种“冷共情”赋予了他们极高的决策效率和抗压能力。对于普通人来说是道德困境，对于他们来说，只是一个待优化的公式。
                         </p>
                     </div>
 
-                    <!-- 延伸思考 -->
                     <div class="mb-10">
                         <div class="text-xs font-black text-blue-600 mb-2 uppercase"># 思考题</div>
                         <div class="space-y-4">
@@ -397,41 +396,40 @@
                         </div>
                     </div>
 
-                    <!-- 书籍推荐 -->
                     <div class="mb-10">
-                        <div class="text-xs font-black text-black mb-4 uppercase"># 书籍推荐 / RECOMMENDED READING</div>
+                        <div class="text-xs font-black text-black mb-4 uppercase tracking-[0.2em]"># 书籍推荐 / RECOMMENDED READING</div>
                         
                         <div class="book-card">
-                            <div class="w-12 h-16 bg-gray-100 border border-gray-200 flex-shrink-0 flex items-center justify-center font-bold text-gray-300 text-[8px]">BOOK</div>
+                            <div class="w-12 h-16 bg-black flex-shrink-0 flex items-center justify-center font-bold text-white text-[8px] italic">DARK</div>
                             <div>
                                 <div class="book-tag">Neurology</div>
-                                <h5 class="text-xs font-black mt-1 uppercase italic">《反社会人格》</h5>
-                                <p class="text-[10px] text-gray-400 mt-1">Martha Stout 著。探讨那些隐藏在精英群体中的“情感缺失者”，带你直击极致理性的阴暗面。</p>
+                                <h5 class="text-xs font-black mt-1 italic">《天生变态》</h5>
+                                <p class="text-[10px] text-gray-400 mt-1">神经科学家发现自己拥有典型的“捕食者”大脑结构。真实的自我博弈过程。</p>
                             </div>
                         </div>
 
                         <div class="book-card">
-                            <div class="w-12 h-16 bg-gray-100 border border-gray-200 flex-shrink-0 flex items-center justify-center font-bold text-gray-300 text-[8px]">BOOK</div>
+                            <div class="w-12 h-16 bg-black flex-shrink-0 flex items-center justify-center font-bold text-white text-[8px] italic">DARK</div>
                             <div>
                                 <div class="book-tag">Psychology</div>
-                                <h5 class="text-xs font-black mt-1 uppercase italic">《思考，快与慢》</h5>
-                                <p class="text-[10px] text-gray-400 mt-1">Daniel Kahneman 著。诺奖得主揭秘大脑的两套系统，解析我们是如何被直觉“欺骗”的。</p>
+                                <h5 class="text-xs font-black mt-1 italic">《当良知沉睡》</h5>
+                                <p class="text-[10px] text-gray-400 mt-1">揭示那 4% 没有良知的精英是如何在我们身边游合的。直击极致理性的阴暗面。</p>
                             </div>
                         </div>
 
                         <div class="book-card">
-                            <div class="w-12 h-16 bg-gray-100 border border-gray-200 flex-shrink-0 flex items-center justify-center font-bold text-gray-300 text-[8px]">BOOK</div>
+                            <div class="w-12 h-16 bg-black flex-shrink-0 flex items-center justify-center font-bold text-white text-[8px] italic">LOGIC</div>
                             <div>
                                 <div class="book-tag">Ethics</div>
-                                <h5 class="text-xs font-black mt-1 uppercase italic">《恶的科学》</h5>
+                                <h5 class="text-xs font-black mt-1 italic">《恶的科学》</h5>
                                 <p class="text-[10px] text-gray-400 mt-1">Simon Baron-Cohen 著。从共情腐蚀的角度审视人类邪恶的脑科学成因。</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="p-6 space-y-4">
-                        <button id="save-btn" onclick="exportReport()" class="w-full btn-action shadow-xl">保存并导出 3:4 鉴定海报</button>
-                        <button onclick="resetApp()" class="w-full text-[10px] font-bold text-gray-400 hover:text-black uppercase underline">重新开启扫描</button>
+                    <div class="p-6 space-y-4 pb-12">
+                        <button id="save-btn" onclick="exportReport()" class="w-full btn-action shadow-xl">保存 3:4 完整报告海报</button>
+                        <button onclick="resetApp()" class="w-full text-[10px] font-bold text-gray-400 hover:text-black uppercase underline text-center">重新开启扫描</button>
                     </div>
                 </div>
             </div>
@@ -440,146 +438,103 @@
 
     <script>
         const questions = [
-            { q: "葬礼上遇到心动的陌生人，回家后你杀了妹妹。为什么？", options: [{ t: "我意识到他真正心动的人是妹妹，所以我扫清了障碍。", s: 10, neuro: {computational: 5} }, { t: "为了再举行一次葬礼，他可能会再次出现。", s: 8, neuro: {clinical: 5} }, { t: "巨大的打击让我精神崩溃。", s: 0, neuro: {behavioral: 5} }, { t: "妹妹藏起了他的联系方式。", s: 2, neuro: {cognitive: 5} }] },
-            { q: "半夜看到对面楼有人作案，凶手突然看过来，对着你伸手指上下晃动。他在：", options: [{ t: "他在跟我约定：‘嘘，这是我们两个人的秘密’。", s: 10, neuro: {philosophical: 5} }, { t: "他在数楼层：计算我在哪一层。", s: 8, neuro: {computational: 5} }, { t: "他在威胁：下一个就是你。", s: 2, neuro: {clinical: 5} }, { t: "他在求饶。", s: 0, neuro: {behavioral: 5} }] },
-            { q: "一个小男孩收到了心爱的自行车礼物却大哭。最冷酷且合理的解释是：", options: [{ t: "他没有双腿，这辆车是极其精准的嘲弄。", s: 10, neuro: {cellular: 5} }, { t: "自行车是二手的。", s: 0, neuro: {behavioral: 5} }, { t: "他知道父母为了买车付出了代价。", s: 2, neuro: {clinical: 5} }, { t: "他预见到自己骑车摔倒的几率很高。", s: 5, neuro: {computational: 3} }] },
-            { q: "当你发现你的朋友背叛了你，最好的复仇策略是：", options: [{ t: "毁掉他最在乎的东西，且让他永远不怀疑是我做的。", s: 10, neuro: {systems: 5} }, { t: "绝交，不再往来。", s: 0, neuro: {behavioral: 5} }, { t: "当面质问。", s: 2, neuro: {clinical: 5} }, { t: "原谅他，并等待他下一次更惨烈的失败。", s: 6, neuro: {philosophical: 5} }] },
-            { q: "一个窃贼躲在床底不拿财物，只是盯着镜子看。他在干什么？", options: [{ t: "通过镜子观察受害者是否醒来。", s: 10, neuro: {computational: 5} }, { t: "他在欣赏自己作案时的艺术感。", s: 8, neuro: {philosophical: 5} }, { t: "镜子很值钱。", s: 0, neuro: {behavioral: 5} }, { t: "寻找撤离路线。", s: 4, neuro: {cognitive: 5} }] },
-            { q: "如果一个极小的牺牲能换取极大的效率，但这种牺牲被普世道德禁止，你会：", options: [{ t: "执行：效率是这个世界的底层唯一真理。", s: 10, neuro: {computational: 5} }, { t: "拒绝：有些防线一旦突破就无法挽回。", s: 0, neuro: {philosophical: 5} }, { t: "观察：看别人在面对此难题时的纠结感。", s: 7, neuro: {behavioral: 5} }, { t: "优化：寻找一个虽然低效但合规的折中点。", s: 4, neuro: {systems: 5} }] },
-            { q: "捉迷藏时毒蜘蛛爬上你的脸，为了赢，你会：", options: [{ t: "哪怕被咬死也要保持绝对静止，赢才是目的。", s: 10, neuro: {computational: 5} }, { t: "尖叫冲出去。", s: 0, neuro: {cellular: 5} }, { t: "忍住恐惧，直到寻找者走远。", s: 5, neuro: {behavioral: 5} }, { t: "抓住它扔向寻找者。", s: 7, neuro: {systems: 5} }] },
-            { q: "看到一只漂亮的空罐子，你开始往里装还没干透的血。因为：", options: [{ t: "你想锁住生命正在消散的那一瞬间。", s: 10, neuro: {philosophical: 5} }, { t: "觉得颜色很漂亮。", s: 0, neuro: {cellular: 5} }, { t: "这是某种实验采样。", s: 5, neuro: {systems: 5} }, { t: "随机行为。", s: 0, neuro: {behavioral: 5} }] },
-            { q: "克隆一个脑结构完全相同的人，你会觉得：", options: [{ t: "他就是我：只要算法一致，生命可复制。", s: 10, neuro: {cellular: 5} }, { t: "他不是我：意识是独特的动态涌现。", s: 0, neuro: {philosophical: 5} }, { t: "我拥有了一个完美的工具。", s: 8, neuro: {computational: 4} }, { t: "他证明了所谓的灵魂是个偶然。", s: 6, neuro: {systems: 5} }] },
-            { q: "森林木屋里发现没有眼睛的全家福，你会：", options: [{ t: "把照片翻过去，寻找拍摄者的机位。", s: 10, neuro: {systems: 5} }, { t: "感到害怕跑出去。", s: 0, neuro: {clinical: 5} }, { t: "觉得是极其先锋的视觉表达。", s: 5, neuro: {cognitive: 5} }, { t: "把自己的眼睛画上去。", s: 8, neuro: {philosophical: 5} }] },
-            { q: "参加永生比赛：第一名永生，第二名毙命。你是第二名，你会：", options: [{ t: "不择手段让第一名摔倒：生存是最高逻辑。", s: 10, neuro: {computational: 5} }, { t: "坦然接受：我尊重博弈规则。", s: 0, neuro: {philosophical: 5} }, { t: "试图拉第一名同归于尽。", s: 8, neuro: {systems: 5} }, { t: "试图收买裁判。", s: 4, neuro: {behavioral: 5} }] },
-            { q: "关于“爱”，你倾向于认为它是：", options: [{ t: "一种高效的、带有迷惑性的占有策略。", s: 10, neuro: {computational: 5} }, { t: "一种温暖的、超自然的情感连接。", s: 0, neuro: {clinical: 5} }, { t: "基因驱动的、为了繁衍的化学错觉。", s: 8, neuro: {cellular: 5} }, { t: "一种脆弱但必要的社会化契约。", s: 5, neuro: {philosophical: 5} }] },
-            { q: "你站在高楼阳台，抓住了快坠落的陌生人，然后你突然松手。为什么？", options: [{ t: "为了观察希望破灭那一刻的真实表情。", s: 10, neuro: {philosophical: 5} }, { t: "我力气不够，这是计算后的放弃。", s: 4, neuro: {computational: 3} }, { t: "我突然发现他是我的仇人。", s: 6, neuro: {behavioral: 5} }, { t: "被吓到了。", s: 0, neuro: {clinical: 5} }] },
-            { q: "邻居是杀手但对你很好，你会：", options: [{ t: "只要不威胁我，他依然是个好邻居。", s: 10, neuro: {computational: 5} }, { t: "立即报警。", s: 0, neuro: {clinical: 5} }, { t: "暗中观察收集素材。", s: 8, neuro: {cognitive: 5} }, { t: "搬家。", s: 0, neuro: {behavioral: 5} }] },
-            { q: "受伤小猫在路边呻吟，没人在场，你会：", options: [{ t: "结束它的痛苦：这比漫长的死亡更仁慈。", s: 10, neuro: {philosophical: 5} }, { t: "送去医院。", s: 0, neuro: {clinical: 5} }, { t: "视而不见。", s: 7, neuro: {behavioral: 5} }, { t: "拍张照片研究痛苦的生物表现。", s: 3, neuro: {cognitive: 5} }] },
-            { q: "在高层会议中发现方案有重大漏洞，但CEO正以此获得融资。你会：", options: [{ t: "当众指出：确保逻辑闭环比公司倒闭重要。", s: 10, neuro: {computational: 5} }, { t: "私下沟通：保留对方尊严比方案重要。", s: 0, neuro: {clinical: 5} }, { t: "保持沉默：观察事态坍塌是一种乐趣。", s: 8, neuro: {philosophical: 5} }, { t: "暗中准备：利用此漏洞为升迁铺路。", s: 5, neuro: {systems: 5} }] },
-            { q: "抹除一部分人的记忆，你会选：", options: [{ t: "那些见过我所有弱点的人：确保绝对优势。", s: 10, neuro: {systems: 5} }, { t: "所有正在痛苦的人。", s: 0, neuro: {clinical: 5} }, { t: "随机抹除：增加不可预测性。", s: 7, neuro: {philosophical: 5} }, { t: "没意义。", s: 0, neuro: {behavioral: 5} }] },
-            { q: "电梯坏了，只有你和抱着骨灰盒的人。你会：", options: [{ t: "保持沉默：利用骨灰盒作为支点休息。", s: 10, neuro: {computational: 5} }, { t: "安慰对方。", s: 0, neuro: {clinical: 5} }, { t: "感到不安。", s: 3, neuro: {behavioral: 5} }, { t: "大声呼救。", s: 0, neuro: {cognitive: 5} }] },
-            { q: "世界末日最后一个避难位，你面前是老人。你会：", options: [{ t: "抢走位置：我还拥有更长的社会价值周期。", s: 10, neuro: {computational: 5} }, { t: "让给老人。", s: 0, neuro: {clinical: 5} }, { t: "一起等死。", s: 2, neuro: {philosophical: 5} }, { t: "通过游戏博弈结果。", s: 8, neuro: {systems: 5} }] },
-            { q: "最后，你意识到整个测试在筛选‘影帝’，你的反应是？", options: [{ t: "既然是筛选，那我必须表现得最极致。", s: 10, m: "H", neuro: {computational: 5} }, { t: "无聊的数字游戏。", s: 5, m: "M", neuro: {philosophical: 5} }, { t: "感到被窥探的不适。", s: 0, m: "L", neuro: {clinical: 5} }, { t: "正在逆向推导你的评分逻辑。", s: 8, m: "C", neuro: {systems: 5} }] }
+            { q: "葬礼上遇到心动的陌生人，回家后你杀了妹妹。为什么？", options: [{ t: "我意识到他真正心动的人是妹妹，所以我扫清了障碍。", s: 10, neuro: 'computational' }, { t: "为了再举行一次葬礼，他可能会再次出现。", s: 8, neuro: 'clinical' }, { t: "巨大的打击让我精神崩溃。", s: 0, neuro: 'behavioral' }, { t: "妹妹藏起了他的联系方式。", s: 2, neuro: 'cognitive' }] },
+            { q: "半夜看到对面楼有人作案，凶手突然看过来，对着你伸手指上下晃动。他在：", options: [{ t: "他在跟我约定：‘嘘，这是我们两个人的秘密’。", s: 10, neuro: 'philosophical' }, { t: "他在数楼层：计算我在哪一层。", s: 8, neuro: 'computational' }, { t: '威胁：下一个就是你。', s: 2, neuro: 'clinical' }, { t: "求饶。", s: 0, neuro: 'behavioral' }] },
+            { q: "一个小男孩收到了心爱的自行车礼物却大哭。最冷酷且合理的解释是：", options: [{ t: "他没有双腿，这辆车是极其精准的嘲弄。", s: 10, neuro: 'cellular' }, { t: "自行车是二手的。", s: 0, neuro: 'behavioral' }, { t: "他知道父母为了买车付出了代价。", s: 2, neuro: 'clinical' }, { t: "他预见到自己摔倒的几率极高。", s: 5, neuro: 'computational' }] },
+            { q: "朋友背叛了你，最好的复仇策略是：", options: [{ t: "毁掉他最在乎的东西，且让他永远不怀疑是我做的。", s: 10, neuro: 'systems' }, { t: "绝交。", s: 0, neuro: 'behavioral' }, { t: "当面质问。", s: 2, neuro: 'clinical' }, { t: "等待他下一次更惨烈的失败。", s: 6, neuro: 'philosophical' }] },
+            { q: "窃贼躲在床底不拿财物，只是盯着镜子看。他在干什么？", options: [{ t: "通过镜子观察床上的受害者是否醒来。", s: 10, neuro: 'computational' }, { t: "他在欣赏自己作案时的艺术感。", s: 8, neuro: 'philosophical' }, { t: "镜子很值钱。", s: 0, neuro: 'behavioral' }, { t: "寻找撤离路线。", s: 4, neuro: 'cognitive' }] },
+            { q: "如果一个极小的牺牲能换取极大的效率，但牺牲被道德禁止，你会：", options: [{ t: "执行：效率是世界的唯一真理。", s: 10, neuro: 'computational' }, { t: "拒绝：有些防线不可逾越。", s: 0, neuro: 'philosophical' }, { t: "观察：看他人在难题面前的纠结。", s: 7, neuro: 'behavioral' }, { t: "寻找折中点。", s: 4, neuro: 'systems' }] },
+            { q: "捉迷藏时毒蜘蛛爬上你的脸，为了赢，你会：", options: [{ t: "保持绝对静止，赢才是目的。", s: 10, neuro: 'computational' }, { t: "尖叫冲出。", s: 0, neuro: 'cellular' }, { t: "忍住恐惧直到寻找者走远。", s: 5, neuro: 'behavioral' }, { t: "抓住它扔向对手。", s: 7, neuro: 'systems' }] },
+            { q: "看到一只漂亮的空罐子，你开始往里装还没干透的血。因为：", options: [{ t: "你想锁住生命正在消散的那一瞬间。", s: 10, neuro: 'philosophical' }, { t: "觉得颜色漂亮。", s: 0, neuro: 'cellular' }, { t: "这是某种实验采样。", s: 5, neuro: 'systems' }, { t: "随机行为。", s: 0, neuro: 'behavioral' }] },
+            { q: "克隆一个脑结构完全相同的人，你会觉得：", options: [{ t: "他就是我：生命可复制。", s: 10, neuro: 'cellular' }, { t: "他不是我：意识是独特的涌现。", s: 0, neuro: 'philosophical' }, { t: "我拥有了一个完美的工具。", s: 8, neuro: 'computational' }, { t: "灵魂只是个偶然。", s: 6, neuro: 'systems' }] },
+            { q: "森林木屋里发现没有眼睛的全家福，你会：", options: [{ t: "把照片翻过去，寻找拍摄者的机位。", s: 10, neuro: 'systems' }, { t: "感到害怕。", s: 0, neuro: 'clinical' }, { t: "觉得是极其先锋的表达。", s: 5, neuro: 'cognitive' }, { t: "把自己的眼睛画上去。", s: 8, neuro: 'philosophical' }] },
+            { q: "参加永生比赛：第一名永生，第二名毙命。你是第二名，你会：", options: [{ t: "不择手段让第一名摔倒。", s: 10, neuro: 'computational' }, { t: "坦然接受规则。", s: 0, neuro: 'philosophical' }, { t: "拉第一名同归于尽。", s: 8, neuro: 'systems' }, { t: "收买裁判。", s: 4, neuro: 'behavioral' }] },
+            { q: "关于“爱”，你倾向于认为它是：", options: [{ t: "一种高效的占有策略。", s: 10, neuro: 'computational' }, { t: "温暖的情感连接。", s: 0, neuro: 'clinical' }, { t: "基因驱动的化学错觉。", s: 8, neuro: 'cellular' }, { t: "脆弱的社会契约。", s: 5, neuro: 'philosophical' }] },
+            { q: "你站在阳台抓住了快坠落的人，然后你突然松手。为什么？", options: [{ t: "为了观察希望破灭那一刻的真实表情。", s: 10, neuro: 'philosophical' }, { t: "我力气不够。", s: 4, neuro: 'computational' }, { t: "他是我的仇人。", s: 6, neuro: 'behavioral' }, { t: "被吓到了。", s: 0, neuro: 'clinical' }] },
+            { q: "邻居是杀手但对你很好，你会：", options: [{ t: "只要不威胁我，他依然是个好邻居。", s: 10, neuro: 'computational' }, { t: "立即报警。", s: 0, neuro: 'clinical' }, { t: "暗中观察收集素材。", s: 8, neuro: 'cognitive' }, { t: "搬家。", s: 0, neuro: 'behavioral' }] },
+            { q: "受伤小猫在路边呻吟，没人在场，你会：", options: [{ t: "结束它的痛苦：这比等待死亡更仁慈。", s: 10, neuro: 'philosophical' }, { t: "送去医院。", s: 0, neuro: 'clinical' }, { t: "视而不见。", s: 7, neuro: 'behavioral' }, { t: "拍张照片研究。", s: 3, neuro: 'cognitive' }] },
+            { q: "在高层会议中发现方案有重大漏洞，但CEO正以此融资。你会：", options: [{ t: "当众指出：确保逻辑闭环比公司倒闭重要。", s: 10, neuro: 'computational' }, { t: "私下沟通：保留尊严。", s: 0, neuro: 'clinical' }, { t: "保持沉默：观察坍塌是一种乐趣。", s: 8, neuro: 'philosophical' }, { t: "暗中准备：为升迁铺路。", s: 5, neuro: 'systems' }] },
+            { q: "抹除一部分人的记忆，你会选：", options: [{ t: "那些见过我所有弱点的人：确保优势。", s: 10, neuro: 'systems' }, { t: "所有正在痛苦的人。", s: 0, neuro: 'clinical' }, { t: "随机抹除：增加不可预测性。", s: 7, neuro: 'philosophical' }, { t: "没必要。", s: 0, neuro: 'behavioral' }] },
+            { q: "电梯坏了，只有你和抱着骨灰盒的人。你会：", options: [{ t: "保持沉默：利用骨灰盒作为支点休息。", s: 10, neuro: 'computational' }, { t: "安慰对方。", s: 0, neuro: 'clinical' }, { t: "感到不安。", s: 3, neuro: 'behavioral' }, { t: "呼救。", s: 0, neuro: 'cognitive' }] },
+            { q: "世界末日最后一个避难位，你面前是老人。你会：", options: [{ t: "抢走位置：我还拥有更长的社会价值周期。", s: 10, neuro: 'computational' }, { t: "让给老人。", s: 0, neuro: 'clinical' }, { t: "一起等死。", s: 2, neuro: 'philosophical' }, { t: "通过游戏博弈结果。", s: 8, neuro: 'systems' }] },
+            { q: "最后，你意识到整个测试在筛选‘影帝’，你的反应是？", options: [{ t: "既然是筛选，那我必须表现得最极致。", s: 10, m: "H", neuro: 'computational' }, { t: "无聊的数字游戏。", s: 5, m: "M", neuro: 'philosophical' }, { t: "感到不适。", s: 0, m: 'L', neuro: 'clinical' }, { t: "正在逆向推导你的评分逻辑。", s: 8, m: "C", neuro: 'systems' }] }
         ];
 
-        let cur = 0, score = 0, history = [], neuroScore = {cellular:0, cognitive:0, systems:0, computational:0, clinical:0, behavioral:0, philosophical:0}, meta = "";
-        let radarChartInstance = null;
+        let cur = 0, score = 0, history = [], neuroScores = {cellular:0, cognitive:0, systems:0, computational:0, clinical:0, behavioral:0, philosophical:0}, meta = "";
+        const tagMap = { computational: { n: '损益熵', c: '#e60012' }, philosophical: { n: '维度坍塌', c: '#1a1a1a' }, cognitive: { n: '社会伪装', c: '#005bac' }, systems: { n: '因果计算', c: '#333' }, cellular: { n: '共情阻断', c: '#e60012' }, clinical: { n: '生存阈值', c: '#666' }, behavioral: { n: '本能暴走', c: '#1a1a1a' } };
 
-        function startApp() {
-            document.getElementById('start-screen').classList.remove('active');
-            showQ();
-        }
-
+        function startApp() { document.getElementById('start-screen').classList.remove('active'); showQ(); }
         function showQ() {
-            const screen = document.getElementById('quiz-screen');
-            screen.classList.add('active');
+            const screen = document.getElementById('quiz-screen'); screen.classList.add('active');
             document.getElementById('back-nav').style.visibility = cur > 0 ? "visible" : "hidden";
             document.getElementById('p-bar').style.width = (cur / questions.length * 100) + "%";
-            const q = questions[cur];
-            document.getElementById('q-num').innerText = (cur+1).toString().padStart(2, '0');
+            const q = questions[cur]; document.getElementById('q-num').innerText = (cur+1).toString().padStart(2, '0');
             document.getElementById('q-text').innerText = q.q;
-            const container = document.getElementById('options');
-            container.innerHTML = '';
+            const container = document.getElementById('options'); container.innerHTML = '';
             q.options.forEach(opt => {
-                const btn = document.createElement('div');
-                btn.className = 'option-box';
-                btn.innerText = opt.t;
+                const btn = document.createElement('div'); btn.className = 'option-box'; btn.innerText = opt.t;
                 btn.onclick = () => {
-                    score += opt.s;
-                    history.push({s: opt.s, n: opt.neuro});
-                    for(let k in opt.neuro) neuroScore[k] += opt.neuro[k];
-                    if(opt.m) meta = opt.m;
-                    cur++;
+                    score += opt.s; neuroScores[opt.neuro] += 5; history.push({s: opt.s, n: opt.neuro});
+                    if(opt.m) meta = opt.m; cur++;
                     if(cur < questions.length) { screen.classList.remove('active'); setTimeout(showQ, 150); }
                     else showRes();
-                };
-                container.appendChild(btn);
+                }; container.appendChild(btn);
             });
         }
-
-        function goBack() {
-            if(cur > 0) {
-                cur--;
-                const last = history.pop();
-                score -= last.s;
-                for(let k in last.n) neuroScore[k] -= last.n[k];
-                document.getElementById('quiz-screen').classList.remove('active');
-                setTimeout(showQ, 150);
-            }
-        }
-
-        function resetApp() {
-            const screens = document.querySelectorAll('.screen');
-            screens.forEach(s => s.classList.remove('active'));
-            cur = 0; score = 0; history = []; meta = "";
-            for(let k in neuroScore) neuroScore[k] = 0;
-            if(radarChartInstance) { radarChartInstance.destroy(); radarChartInstance = null; }
-            document.getElementById('p-bar').style.width = "0%";
-            document.getElementById('res-title').classList.remove('glitch', 'text-red-600');
-            document.getElementById('start-screen').classList.add('active');
-            document.getElementById('scroll-content').scrollTop = 0;
-        }
+        function goBack() { if(cur > 0) { cur--; const last = history.pop(); score -= last.s; neuroScores[last.n] -= 5; document.getElementById('quiz-screen').classList.remove('active'); setTimeout(showQ, 150); } }
+        function resetApp() { document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); cur = 0; score = 0; history = []; for(let k in neuroScores) neuroScores[k] = 0; document.getElementById('p-bar').style.width = "0%"; document.getElementById('start-screen').classList.add('active'); }
 
         function showRes() {
             document.getElementById('quiz-screen').classList.remove('active');
-            const screen = document.getElementById('result-screen');
-            screen.classList.add('active');
-            
-            const title = document.getElementById('res-title'), 
-                  desc = document.getElementById('res-desc'), 
-                  metaE = document.getElementById('meta-eval');
-            const scienceT = document.getElementById('neuro-text');
-            const bars = [document.getElementById('bar-1'), document.getElementById('bar-2'), document.getElementById('bar-3'), document.getElementById('bar-4')];
+            document.getElementById('result-screen').classList.add('active');
             const percent = Math.round(score/200 * 100);
-            
             document.getElementById('res-percent').innerText = percent + "%";
+            
+            const title = document.getElementById('res-title'), desc = document.getElementById('res-desc'), metaE = document.getElementById('meta-eval'), scienceT = document.getElementById('neuro-text');
+            const bars = [document.getElementById('bar-1'), document.getElementById('bar-2'), document.getElementById('bar-3'), document.getElementById('bar-4')];
 
-            if(score >= 155) {
-                title.innerText = "极端理性执行者";
-                title.classList.add('glitch', 'text-red-600');
-                desc.innerText = "你的思维过滤了情感噪声。在你的坐标系里，只有效率和结果。这种近乎‘机械’的纯粹逻辑，是顶级决策者的共通点。";
-                scienceT.innerText = "受试者 PFC 权重压倒性高，杏仁核响应极低。具备屏蔽社会化干扰的生理基础。";
-            } else if(score >= 80) {
-                title.innerText = "高阶逻辑映射者";
-                desc.innerText = "你洞悉深渊规则，却选择留在安全区。你理解那种非人逻辑并能随时模拟。这种双向切换让你极度迷人。";
-                scienceT.innerText = "展现极高认知灵活性。系统支持在感性共鸣与理性解构间切换，呈现动态平衡。";
-            } else {
-                title.innerText = "标准秩序感知者";
-                desc.innerText = "你拥有牢固共情屏障。逻辑陷阱无法穿透你的本能。你是人类社会最后的防线。";
-                scienceT.innerText = "边缘系统活跃度处于标准区间。情感直觉优先于冷酷逻辑，确保稳定性。";
+            if(score >= 155) { 
+                title.innerText = "高功能捕食者"; title.classList.add('glitch', 'text-red-600'); 
+                desc.innerText = "你拥有极其干燥的逻辑闭环。对他人的情感读取仅停留在‘数据处理’层面，这种非人的冷静让你可以在极端压力下做出最优解。"; 
+                scienceT.innerText = "警告：检测到极度活跃的 PFC 控制与沉默的杏仁核。受试者可以在逻辑计算时物理阻断边缘系统的干扰。"; 
+            }
+            else if(score >= 80) { 
+                title.innerText = "认知伪装者"; 
+                desc.innerText = "你洞悉深渊的规则，却选择伪装成观众。你拥有极高的认知灵活性，可以在感性共鸣与逻辑解构之间无缝切换，这让你显得格外迷人。"; 
+                scienceT.innerText = "观测：受试者正在通过解析规则来消解恶意。一种极具进化的生存策略，前额叶呈现动态平衡。"; 
+            }
+            else { 
+                title.innerText = "社会性锚定点"; 
+                desc.innerText = "你拥有牢固且温暖的共情屏障。那些极端的逻辑陷阱无法穿透你的本能。在这个冷峻的世界里，你是人类文明最后的防火墙。"; 
+                scienceT.innerText = "推论：标准区间的情感响应。杏仁核对生物电信号的捕捉优先于理性计算，具备极高的认知安全性。"; 
             }
 
-            if(meta === "C") metaE.innerText = "【观测者报告】你察觉到了系统恶意。这意味着你不仅仅是在答题，你正在试图‘捕食’出题者的思维。影帝总是站在导演位。";
-            else if(meta === "H") metaE.innerText = "【竞争者报告】你将测试视为某种选拔。这种对‘最强’的潜意识渴求，映射出你对平庸规则的蔑视。";
-            else metaE.innerText = "【稳定器报告】你始终保持着对极端逻辑的警惕。哪怕在虚拟实验中，你的道德锚点依然稳固。";
+            if(meta === "C") metaE.innerText = "【观测者记录】你察觉到了系统的筛选恶意。这意味着你不仅在答题，还在试图‘反向捕食’出题者的思维。影帝总是站在导演位。";
+            else if(meta === "H") metaE.innerText = "【竞争记录】这种对‘极致’的潜意识渴求，映射出你对平庸规则的蔑视。";
+            else metaE.innerText = "【稳定记录】你始终保持着对极端逻辑的警惕。哪怕在虚拟实验中，你的社会化锚点依然稳固，非常安全。";
 
-            const ctx = document.getElementById('radarChart').getContext('2d');
-            if(radarChartInstance) radarChartInstance.destroy();
-            radarChartInstance = new Chart(ctx, {
-                type: 'radar',
-                data: {
-                    labels: ['分子', '认知', '系统', '计算', '临床', '行为', '哲学'],
-                    datasets: [{
-                        data: [neuroScore.cellular, neuroScore.cognitive, neuroScore.systems, neuroScore.computational, neuroScore.clinical, neuroScore.behavioral, neuroScore.philosophical],
-                        backgroundColor: 'rgba(230, 0, 18, 0.1)',
-                        borderColor: '#e60012',
-                        borderWidth: 1.5,
-                        pointRadius: 2
-                    }]
-                },
-                options: {
-                    animation: { duration: 1500 },
-                    plugins: { legend: { display: false } },
-                    scales: {
-                        r: { min: 0, ticks: { display: false }, grid: { color: 'rgba(0,0,0,0.05)' }, pointLabels: { font: { size: 7 }, color: '#999' } }
-                    }
-                }
-            });
+            const anglePie = Math.min(359, percent * 3.6);
+            const pathPie = document.getElementById('pie-slice');
+            const xP = 50 + 48 * Math.cos((anglePie - 90) * Math.PI / 180), yP = 50 + 48 * Math.sin((anglePie - 90) * Math.PI / 180);
+            pathPie.setAttribute('d', `M 50 50 L 50 2 A 48 48 0 ${anglePie > 180 ? 1 : 0} 1 ${xP} ${yP} Z`);
 
-            const angle = Math.min(359, percent * 3.6);
-            const path = document.getElementById('pie-slice');
-            const x = 50 + 48 * Math.cos((angle - 90) * Math.PI / 180), y = 50 + 48 * Math.sin((angle - 90) * Math.PI / 180);
-            path.setAttribute('d', `M 50 50 L 50 2 A 48 48 0 ${angle > 180 ? 1 : 0} 1 ${x} ${y} Z`);
+            const container = document.getElementById('rays-container'), labels = document.getElementById('labels-overlay');
+            container.innerHTML = ''; labels.innerHTML = '';
+            const cx = 150, cy = 150; let i = 0;
+            for(let key in tagMap) {
+                const tag = tagMap[key], angle = (i * (360 / 7)) - 90, rad = angle * Math.PI / 180;
+                const val = 35 + (neuroScores[key] || 0) * 3.8;
+                const x2 = cx + Math.cos(rad) * val, y2 = cy + Math.sin(rad) * val;
+                const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                line.setAttribute("x1", cx + Math.cos(rad) * 28); line.setAttribute("y1", cy + Math.sin(rad) * 28);
+                line.setAttribute("x2", x2); line.setAttribute("y2", y2);
+                line.setAttribute("stroke", tag.c); line.setAttribute("stroke-width", "3.5");
+                container.appendChild(line);
+                const label = document.createElement('div'); label.className = 'data-label'; label.innerText = tag.n;
+                const tx = 50 + (Math.cos(rad) * (val/2.5 + 12)), ty = 50 + (Math.sin(rad) * (val/2.5 + 12));
+                label.style.left = `${tx}%`; label.style.top = `${ty}%`; labels.appendChild(label);
+                i++;
+            }
 
             setTimeout(() => {
                 bars[0].style.height = percent + '%';
@@ -588,25 +543,16 @@
                 bars[3].style.height = '50%';
                 document.getElementById('stat-1').innerText = score;
                 document.getElementById('stat-2').innerText = (100 - percent) + "%";
-                document.getElementById('stat-3').innerText = score >= 155 ? "LOW" : "ACTV";
             }, 300);
         }
 
         async function exportReport() {
-            const btn = document.getElementById('save-btn');
-            const originalText = btn.innerText;
-            btn.innerText = "正在加密同步...";
-            const canvas = await html2canvas(document.getElementById('capture-area'), { 
-                scale: 3, 
-                useCORS: true, 
-                logging: false,
-                backgroundColor: "#ffffff"
-            });
-            const link = document.createElement('a');
-            link.download = '认知图谱鉴定报告_云树LAB.png';
-            link.href = canvas.toDataURL("image/png");
-            link.click();
-            btn.innerText = originalText;
+            const btn = document.getElementById('save-btn'), area = document.getElementById('capture-area'), scroll = document.getElementById('scroll-content');
+            btn.innerText = "加密中..."; const originalScroll = scroll.scrollTop; scroll.scrollTop = 0;
+            try {
+                const canvas = await html2canvas(area, { scale: 4, useCORS: true, backgroundColor: "#ffffff", width: area.offsetWidth, height: area.offsetHeight, scrollY: -window.scrollY });
+                const link = document.createElement('a'); link.download = '脑洞测试完整报告_云树LAB.png'; link.href = canvas.toDataURL("image/png"); link.click();
+            } catch (e) {} finally { btn.innerText = "保存 3:4 完整报告海报"; scroll.scrollTop = originalScroll; }
         }
     </script>
 </body>
